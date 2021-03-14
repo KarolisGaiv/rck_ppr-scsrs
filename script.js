@@ -28,12 +28,22 @@ function playRound(playerSelection, computerSelection) {
   computerAnswer = choices[computerSelection];
 
   if (playerSelection > computerSelection) {
-    return (`You win: ${playerAnswer} beats ${computerAnswer}`);
+    return `You win: ${playerAnswer} (your choice) beats ${computerAnswer} (computer choice)`;
   } else if (playerSelection < computerSelection) {
-    return (`You loose: ${computerAnswer} beats ${playerAnswer}`);
+    return `You loose: ${computerAnswer} (computer choice) beats ${playerAnswer} (your choice)`;
   } else {
-    return ("It's a tie!");
+    return `It's a tie. Both have choosen ${playerAnswer}`;
   }
 }
 
-console.log(playRound());
+function game() {
+  let i = 0;
+  let numberOfGames = prompt("Enter number of games you want to play");
+
+  do {
+    i = i + 1;
+    console.log(playRound());
+  } while (i <= numberOfGames);
+}
+
+game();
