@@ -1,49 +1,52 @@
-console.log("Welcome to Rock Paper Scissors game!");
 
-function playerChoice() {
-  let input = prompt("Choose your play: Rock, Paper, Scissors").toLowerCase();
-  let answer;
-  if (input === "rock") {
-    answer = 0;
-  } else if (input === "paper") {
-    answer = 1;
-  } else if (input === "scissors") {
-    answer = 2;
-  } else {
-    return console.log("No such choice is available");
-  }
-  return answer;
-}
+// Selectors and global variables
+
+const choices = ["Rock", "Paper", "Scissors"];
+const compHead = document.querySelector(".computer-choice");
+const userHead = document.querySelector(".user-choice");
+const explanation = document.querySelector(".explanation");
+const buttons = document.querySelectorAll("button");
+let user;
+let computer;
+
+// Functions
 
 function computerPlay() {
-  let computerChoice = Math.floor(Math.random() * 3);
-  return computerChoice;
+  computer = choices[Math.floor(Math.random() * 3)];
+  compHead.textContent = computer;
+  return computer;
 }
 
-function playRound(playerSelection, computerSelection) {
-  const choices = ["Rock", "Paper", "Scissors"];
-  playerSelection = playerChoice();
-  computerSelection = computerPlay();
-  playerAnswer = choices[playerSelection];
-  computerAnswer = choices[computerSelection];
+function playerChoice(e) {
+  user = e.target.innerText;
+  userHead.textContent = user;
+  computerPlay();
+  winner();
+  return user;
+}
 
-  if (playerSelection > computerSelection) {
-    return `You win: ${playerAnswer} (your choice) beats ${computerAnswer} (computer choice)`;
-  } else if (playerSelection < computerSelection) {
-    return `You loose: ${computerAnswer} (computer choice) beats ${playerAnswer} (your choice)`;
+function winner() {
+  console.log(user + " User");
+  console.log(computer + " Computer");
+  if (user === "Rock" && computer === "Paper") {
+    explanation.textContent = "Paper covers Rock, You lost!";
+  } else if (user === "Rock" && computer === "Scissors") {
+    explanation.textContent ="Rock crushes Scissors, You Won!";
+  } else if (user === "Paper" && computer === "Scissors") {
+    explanation.textContent ="Scissors cut Paper, You Lost!";
+  } else if (user === "Scissors" && computer === "Rock") {
+    explanation.textContent ="Rock crushes Scissors, You Lost!";
+  } else if (user === "Scissors" && computer === "Paper") {
+    explanation.textContent ="Scissors cut Paper, You Won!";
+  } else if (user === "Paper" && computer === "Rock") {
+    explanation.textContent ="Paper covers Rock, You Won!";
   } else {
-    return `It's a tie. Both have choosen ${playerAnswer}`;
+    explanation.textContent =("It's a TIE!");
   }
 }
 
-function game() {
-  let i = 0;
-  let numberOfGames = prompt("Enter number of games you want to play");
+// Event listeners
 
-  do {
-    i = i + 1;
-    console.log(playRound());
-  } while (i <= numberOfGames);
-}
-
-game();
+buttons.forEach((button) => {
+  button.addEventListener("click", playerChoice);
+});

@@ -1,0 +1,30 @@
+body {
+  background: bisque;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.choice-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  min-width: 90%;
+}
+
+.result-wrapper {
+  margin-top: 20px;
+}
+
+.explanation {
+  color: cornflowerblue;
+}
+
+.computer-choices {
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 5px;
+  color: darkblue;
+}
